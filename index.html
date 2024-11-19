@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+<!-- AOS added jose-->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+crossorigin="anonymous">
+
+<!-- Our style sheets -->
+<link rel="stylesheet" href="css/bodycss.css">
+<link rel="stylesheet" href="sticky.css">
+<link rel="stylesheet" href="css/newnav.css">
+
+<script type="text/javascript" id="MathJax-script" defer
+src="mathjax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<style type="text/css" media="screen">
+.sticky-container {
+position: fixed;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+background-color: black;
+padding: 10px;
+border-radius: 5px;
+
+}
+
+.sticky-button {
+cursor: pointer;
+background-color: #3498db;
+background-color:black;
+color: white;
+padding: 10px 20px;
+border-radius: 5px;
+text-align: center;
+font-size:8px;
+}
+
+
+.close-button {
+background-color: #e74c3c;
+color: white;
+border: none;
+padding: 5px 10px;
+border-radius: 3px;
+cursor: pointer;
+
+}
+
+.floating-container {
+position: fixed;
+width: 100%;
+height: 100%;
+pointer-events: none;
+overflow: hidden;
+}
+
+.floating-symbol {
+position: absolute;
+font-size: 24px;
+color: black;
+color:#89CFF0;
+opacity: 0.1;
+animation: floatAnimation 10s linear infinite;
+}
+
+@keyframes floatAnimation {
+0% {
+transform: translateY(0);
+opacity: 0.3;
+}
+
+100% {
+transform: translateY(calc(100vh + 20px));
+opacity: 0;
+}
+
+
+</style>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+processEscapes: true
+},
+skipStartupTypeset: false
+});
+</script>
+</head>
+
+<body class="text-3d">
+<!-- Document begins -->
+<!--
+<div id="navbar-container">
+<br>
+<a href="index.html">Home</a>
+<br>
+</div>
+-->
+
+<div class="floating-container">
+<div class="column" id="column1">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column2">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column3">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column4">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column5">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column6">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column7">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column8">
+<!-- Add floating math symbols here -->
+</div>
+<div class="column" id="column9">
+<!-- Add floating math symbols here -->
+</div>
+</div>
+<div id="mathProblemContainer">
+ <div id="calculusProblem">
+    <!-- The calculus problem will be displayed here -->
+  </div>
+ <!-- Form for the calculus problem -->
+
+  <form id="calculusForm">
+    <label for="answer">Enter your answer:</label>
+    <input type="text" id="answer" name="answer" required>
+    <button type="submit">Submit</button>
+  </form>
+  </div>
+
+
+
+<div class="center-container">
+
+<div class="center-text">
+<h1>Expressify</h1>
+</div>
+<br>
+
+<div class="center-text  text-3d" style="width:70%">
+</div>
+
+
+ <!-- Add the Bootstrap Carousel -->
+  <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <img src="ViolinHoe.jpg" alt="Image 1">
+      </div>
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <img src="foodForSoul.jpg"  width="900px" height ="500px"alt="Image 2">
+      </div>
+    </div>
+    <!-- Carousel Controls -->
+    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+
+
+
+<script>
+function createFloatingSymbolIfQueueIsEmpty(column) {
+// Check if MathJax queue is empty
+if (MathJax.Hub.queue.queue.length === 0) {
+createFloatingSymbol(column);
+}
+}
+
+const columns = document.querySelectorAll('.column');
+
+function createFloatingSymbol(column) {
+const mathSymbols = ['+', '-', '\\times', '\\div', '\\sqrt', '\\int', '\\sum', '\\frac', '\\pi', '\\theta', '\\nabla', '\\partial'];
+const randomSymbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+
+const floatingSymbol = document.createElement('div');
+floatingSymbol.className = 'floating-symbol';
+floatingSymbol.innerHTML = `$$${randomSymbol}$$`;
+
+const xPosition = Math.random() * window.innerWidth;
+const yPosition = Math.random() * window.innerHeight;
+
+floatingSymbol.style.left = `${xPosition}px`;
+floatingSymbol.style.top = `${yPosition}px`;
+
+column.appendChild(floatingSymbol);
+
+// Wait for a slightly longer delay before typesetting
+setTimeout(() => {
+MathJax.Hub.Queue(['Typeset', MathJax.Hub, floatingSymbol]);
+}, 50); // Adjust this delay as needed
+}
+
+columns.forEach((column) => {
+setInterval(() => {
+createFloatingSymbolIfQueueIsEmpty(column);
+}, 1000);
+});
+</script>
+<script>
+  // Check the "loggedIn" flag in local storage and render the carousel accordingly
+  document.addEventListener("DOMContentLoaded", function () {
+    const loggedIn = localStorage.getItem('loggedIn');
+
+    if (loggedIn === 'true') {
+      // User is logged in, show the carousel
+      const carousel = document.getElementById('imageCarousel');
+      carousel.style.display = 'block';
+    } else {
+      // User is not logged in, hide the carousel
+      const carousel = document.getElementById('imageCarousel');
+      carousel.style.display = 'none';
+    }
+  });
+</script>
+<!-- visibility scripts-->
+<script>
+function updateMathProblemVisibility() {
+    const loggedIn = localStorage.getItem('loggedIn');
+    const mathProblemContainer = document.getElementById('mathProblemContainer');
+
+    if (loggedIn === 'true') {
+      // User is logged in, show the math problem container
+      mathProblemContainer.style.display = 'none';
+    } else {
+      // User is not logged in, hide the math problem container
+      mathProblemContainer.style.display = 'block';
+    }
+  }
+	 function updateCarouselVisibility() {
+    const loggedIn = localStorage.getItem('loggedIn');
+    const imageCarousel = document.getElementById('imageCarousel');
+
+    if (loggedIn === 'true') {
+      // User is logged in, show the carousel container
+      imageCarousel.style.display = 'block';
+    } else {
+      // User is not logged in, hide the carousel container
+      imageCarousel.style.display = 'none';
+    }
+  }
+
+</script>
+
+  <script>
+    // Function to generate a random calculus problem (replace with your own logic)
+    function generateCalculusProblem() {
+      // Generate a random calculus problem here (e.g., integration, differentiation, etc.)
+      const randomProblem = 'Calculate the integral of x^2 dx.';
+      return randomProblem;
+    }
+    // Function to check the user's answer to the problem
+    function checkAnswer(answer) {
+      // Replace this with your actual answer-checking logic
+	    console.log("I am running");
+if (answer === 'x^3/3') {
+  // User's answer is correct, set the "loggedIn" flag in local storage to "true"
+  console.log("right");
+  localStorage.setItem('loggedIn', 'true');
+} else {
+  // User's answer is incorrect, set the "loggedIn" flag to "false"
+  console.log("wrong");
+  localStorage.setItem('loggedIn', 'false');
+}
+      // Update the carousel visibility based on the "loggedIn" flag
+    updateCarouselVisibility();
+    updateMathProblemVisibility();
+    }
+
+    // Render a random calculus problem
+    const calculusProblemElement = document.getElementById('calculusProblem');
+    const randomCalculusProblem = generateCalculusProblem();
+    calculusProblemElement.innerText = randomCalculusProblem;
+
+    // Handle form submission
+    const calculusForm = document.getElementById('calculusForm');
+    calculusForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const answerInput = document.getElementById('answer');
+      const userAnswer = answerInput.value;
+      checkAnswer(userAnswer);
+    });
+  </script>
+
+<script>
+    // Function to check and set the login status in local storage
+    function checkLoginStatus() {
+      // Simulate a math problem solving success
+      const isMathProblemSolved = false; // Change this based on your logic
+	    //default set to false
+
+      if (isMathProblemSolved) {
+        // Set the "loggedIn" flag in local storage
+        localStorage.setItem('loggedIn', 'true');
+      }
+    }
+
+    // Check and set the login status when the page loads
+    checkLoginStatus();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+</body>
+
+</html>
+
