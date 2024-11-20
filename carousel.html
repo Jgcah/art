@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel Page</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+crossorigin="anonymous">
+
+<!-- Reuse CSS from the main page -->
+<link rel="stylesheet" href="css/bodycss.css">
+<link rel="stylesheet" href="sticky.css">
+<link rel="stylesheet" href="css/newnav.css">
+</head>
+<body class="text-3d">
+  
+<!-- Vertical Sidebar Navigation -->
+<div class="vertical-nav">
+  <a href="index.html" class="nav-item">Home</a>
+  <a href="#" class="nav-item active">Other Carousel</a>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+  <h1 class="mt-5 text-center">Welcome to the Carousel Page</h1>
+  <div id="loginPrompt" class="text-center mt-4">
+    <p>Please enter the password to view the content:</p>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+    <button id="submitPassword" class="btn btn-primary">Submit</button>
+    <p id="errorMessage" style="color: red; display: none;">Incorrect password. Try again.</p>
+  </div>
+
+  <!-- Carousel (hidden by default) -->
+  <div id="carouselContainer" style="display: none;">
+    <div id="imageCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <img src="carouselImage1.jpg" class="d-block w-100" alt="Image 1">
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <img src="carouselImage2.jpg" class="d-block w-100" alt="Image 2">
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <img src="carouselImage3.jpg" class="d-block w-100" alt="Image 3">
+        </div>
+      </div>
+      <!-- Carousel Controls -->
+      <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Script to handle password check -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const password = "hiiseafs";
+    const loginPrompt = document.getElementById("loginPrompt");
+    const carouselContainer = document.getElementById("carouselContainer");
+    const errorMessage = document.getElementById("errorMessage");
+    const passwordInput = document.getElementById("passwordInput");
+    const submitPassword = document.getElementById("submitPassword");
+
+    // Check if user is already logged in
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    if (isLoggedIn === "true") {
+      loginPrompt.style.display = "none";
+      carouselContainer.style.display = "block";
+    }
+
+    // Handle password submission
+    submitPassword.addEventListener("click", function () {
+      if (passwordInput.value === password) {
+        // Set login state in local storage
+        localStorage.setItem("loggedIn", "true");
+        loginPrompt.style.display = "none";
+        carouselContainer.style.display = "block";
+      } else {
+        errorMessage.style.display = "block";
+        passwordInput.value = ""; // Clear input for re-entry
+      }
+    });
+  });
+</script>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+</body>
+</html>
+
